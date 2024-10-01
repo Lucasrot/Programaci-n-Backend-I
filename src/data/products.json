@@ -1,0 +1,24 @@
+[
+  {
+    "id": 1,
+    "title": "Camiseta",
+    "description": "Camiseta deportiva",
+    "code": "CAM123",
+    "price": 25,
+    "stock": 100,
+    "category": "Ropa",
+    "status": true,
+    "thumbnails": []
+  },
+  {
+    "id": 2,
+    "title": "buzo",
+    "description": "camisaco",
+    "code": "CAMI10",
+    "price": 80,
+    "stock": 40,
+    "category": "Ropa",
+    "status": true,
+    "thumbnails": []
+  }
+]
