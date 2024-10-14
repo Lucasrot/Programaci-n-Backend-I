@@ -3,7 +3,6 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -12,7 +11,7 @@ const router = Router();
 const productsFilePath = path.join(__dirname, '../data/products.json');
 
 const getProducts = () => {
-  const data = fs.readFileSync(productsFilePath);
+  const data = fs.readFileSync(productsFilePath, 'utf-8'); // Asegúrate de leer como UTF-8
   return JSON.parse(data);
 };
 
@@ -20,13 +19,12 @@ const saveProducts = (products) => {
   fs.writeFileSync(productsFilePath, JSON.stringify(products, null, 2));
 };
 
-
+// Rutas para manejar productos
 router.get('/', (req, res) => {
   const limit = parseInt(req.query.limit) || undefined;
   const products = getProducts();
   res.json(limit ? products.slice(0, limit) : products);
 });
-
 
 router.get('/:pid', (req, res) => {
   const products = getProducts();
@@ -36,7 +34,6 @@ router.get('/:pid', (req, res) => {
   }
   res.json(product);
 });
-
 
 router.post('/', (req, res) => {
   const { title, description, code, price, stock, category } = req.body;
@@ -57,7 +54,6 @@ router.post('/', (req, res) => {
   res.status(201).json(newProduct);
 });
 
-
 router.put('/:pid', (req, res) => {
   const products = getProducts();
   const productIndex = products.findIndex(p => p.id === parseInt(req.params.pid));
@@ -70,7 +66,6 @@ router.put('/:pid', (req, res) => {
   res.json(updatedProduct);
 });
 
-
 router.delete('/:pid', (req, res) => {
   const products = getProducts();
   const updatedProducts = products.filter(p => p.id !== parseInt(req.params.pid));
@@ -81,5 +76,6 @@ router.delete('/:pid', (req, res) => {
   res.status(204).send();
 });
 
-
+// Exportar las funciones necesarias
+export { getProducts, saveProducts };
 export default router;
