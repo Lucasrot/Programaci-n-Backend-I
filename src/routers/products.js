@@ -11,7 +11,7 @@ const router = Router();
 const productsFilePath = path.join(__dirname, '../data/products.json');
 
 const getProducts = () => {
-  const data = fs.readFileSync(productsFilePath, 'utf-8'); // Asegúrate de leer como UTF-8
+  const data = fs.readFileSync(productsFilePath, 'utf-8'); 
   return JSON.parse(data);
 };
 
@@ -19,7 +19,7 @@ const saveProducts = (products) => {
   fs.writeFileSync(productsFilePath, JSON.stringify(products, null, 2));
 };
 
-// Rutas para manejar productos
+
 router.get('/', (req, res) => {
   const limit = parseInt(req.query.limit) || undefined;
   const products = getProducts();
@@ -76,6 +76,6 @@ router.delete('/:pid', (req, res) => {
   res.status(204).send();
 });
 
-// Exportar las funciones necesarias
+
 export { getProducts, saveProducts };
 export default router;
